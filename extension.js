@@ -3,28 +3,36 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 
-const appDir = path.join(path.dirname(process.execPath), "resources/app/out")
-const rootDir = path.join(appDir, '..')
+let appDir = path.join(path.dirname(process.execPath), "resources/app/out")
+let rootDir = path.join(appDir, '..')
 
-const productFile = path.join(rootDir, 'product.json')
-const origFile = `${productFile}.orig.${vscode.version}`
+let productFile = path.join(rootDir, 'product.json')
+let origFile = `${productFile}.orig.${vscode.version}`
 
 exports.activate = function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand('fixChecksums.apply', apply),
     vscode.commands.registerCommand('fixChecksums.restore', restore)
   )
+
+  appDir = path.join(path.dirname(vscode.env.appRoot), "app/out")
+  rootDir = path.join(appDir, "..")
+  productFile = path.join(rootDir, 'product.json')
+  origFile = `${productFile}.orig.${vscode.version}`
+
   cleanupOrigFiles()
+
+  const auto = vscode.workspace.getConfiguration().get("checksums.autoFix")
+  apply(auto)
 }
 
 const messages = {
   changed: verb => `Checksums ${verb}. Please restart VSCode to see effect.`,
   unchanged: 'No changes to checksums were necessary.',
-  error: `An error occurred during execution.
-Make sure you have write access rights to the VSCode files, see README`
+  error: `An error occurred during execution.`,
 }
 
-function apply() {
+function apply(hidden) {
   const product = require(productFile)
   let changed = false
   let message = messages.unchanged
@@ -48,7 +56,9 @@ function apply() {
       message = messages.error
     }
   }
-  vscode.window.showInformationMessage(message)
+  if (hidden !== true) {
+    vscode.window.showInformationMessage(message)
+  }
 }
 
 function restore() {
