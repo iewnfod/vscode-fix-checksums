@@ -9,11 +9,11 @@ An extension to to adjust checksums after changes to VSCode core files. Once the
 ## Installation
 
 Follow the instructions in the
-[Marketplace](https://marketplace.visualstudio.com/items?itemName=iewnfod.com.iewnfod.vscode-fix-checksums),
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=iewnfod.vscode-fix-checksums-next-next),
 or run the following in the command palette:
 
 ```shell
-code --install-extension iewnfod.com.iewnfod.vscode-fix-checksums
+code --install-extension iewnfod.vscode-fix-checksums-next-next
 ```
 
 ## Usage
