@@ -1,6 +1,6 @@
 {
   "name": "vscode-fix-checksums-next-next",
-  "displayName": "Fix VSCode Checksums",
+  "displayName": "Fix VSCode Checksums Next Next",
   "description": "A VSCode extension to adjust checksums after changes to core files",
   "icon": "resources/logo.png",
   "version": "1.3.0",
