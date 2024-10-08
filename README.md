@@ -1,4 +1,4 @@
-# VSCode Extension to Fix Checksums for macOS
+# VSCode Extension to Fix Checksums
 
 An extension to to adjust checksums after changes to VSCode core files. Once the checksum changes are applied and VSCode is restarted, all warning about core file modifications will disappear, such as the display of `[Unsupported]` in the title-bar, or the following dialog on start-up:
 
